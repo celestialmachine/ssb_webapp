@@ -1,0 +1,2 @@
+C:\Projects\ssb_webapp\obj\Debug\ssb_webapp.esproj.SuggestedBindingRedirects.cache
+C:\Projects\ssb_webapp\obj\Debug\ssb_webapp.esproj.CoreCompileInputs.cache
