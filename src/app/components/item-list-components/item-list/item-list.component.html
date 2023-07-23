@@ -1,1 +1,13 @@
-<p>item-list works!</p>
+
+<table class="table">
+  <tr>
+    <th>Item</th>
+    <th>Amount</th>
+    <th>Due</th>
+  </tr>
+  <tr *ngFor="let item of items">
+    <td>{{item.name}}</td>
+    <td>{{item.amount}}</td>
+    <td>{{item.occurrence}}</td>
+  </tr>
+</table>

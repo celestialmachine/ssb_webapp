@@ -6,6 +6,7 @@ import { ItemListComponent } from './components/item-list-components/item-list/i
 
 
 const routes: Routes = [
+  { path: '', redirectTo: 'budget-list', pathMatch: 'full'},
   { path: 'budget-list', component: ItemListComponent }
 ];
 
