@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BudgetItemComponent } from '../budget-item/budget-item.component';
 import { SsbApiService } from '../../../ssb-api.service';
 import { IBudgetItem } from '../../../ibudget-item';
+import { BudgetItemComponent } from '../budget-item/budget-item.component';
 
 @Component({
   selector: 'app-item-list',

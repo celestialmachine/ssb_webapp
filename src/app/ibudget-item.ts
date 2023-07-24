@@ -3,13 +3,13 @@ export interface IBudgetItem {
   name: string;
   description: string;
   occurrence: Occurrence;
-  occurenceDay: number;
+  occurrenceDay: number;
   amount: number;
 }
 
-enum Occurrence {
-  None = 0,
-  Monthly = 1,
-  Weekly = 2,
-  BiWeekly = 3
+export enum Occurrence {
+  None,
+  Monthly,
+  Weekly,
+  BiWeekly
 }

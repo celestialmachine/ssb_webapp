@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IBudgetItem } from './ibudget-item';
+//import { BudgetItemComponent } from '../app/components/item-list-components/budget-item/budget-item.component';
 
 @Injectable({
   providedIn: 'root'

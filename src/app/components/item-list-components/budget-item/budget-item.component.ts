@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IBudgetItem } from 'src/app/ibudget-item'
 
 @Component({
-  selector: 'app-budget-item',
+  selector: 'tr[app-budget-item]',
   templateUrl: './budget-item.component.html',
   styleUrls: ['./budget-item.component.css']
 })
-export class BudgetItemComponent {
-  item?: IBudgetItem;
+export class BudgetItemComponent{
+
+  @Input() item!: IBudgetItem;
+
 }
