@@ -1,9 +1,11 @@
-<table class="table">
-  <tr>
-    <th>Item</th>
-    <th>Amount</th>
-    <th>Due</th>
-  </tr>
-  <tr app-budget-item *ngFor="let item of items" [item]="item"></tr>
-</table>
+<div>
+  <table class="table">
+    <tr>
+      <th>Item</th>
+      <th>Amount</th>
+      <th>Due</th>
+    </tr>
+    <tr app-budget-item *ngFor="let item of items" [item]="item"></tr>
+  </table>
+</div>
 

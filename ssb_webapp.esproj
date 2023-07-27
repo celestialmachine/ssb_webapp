@@ -11,8 +11,6 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\ssb_webapp</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="src\app\components\item-list-components\" />
-    <Folder Include="src\app\components\event-list\" />
-    <Folder Include="src\app\components\calendar\" />
+    <Folder Include="src\app\components\event-list-components\event-list\" />
   </ItemGroup>
 </Project>

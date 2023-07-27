@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IBudgetItem } from 'src/app/ibudget-item'
+import { BudgetItemDto } from '../budget-item/budget-item-dto';
 
 @Component({
   selector: 'tr[app-budget-item]',
@@ -8,6 +8,6 @@ import { IBudgetItem } from 'src/app/ibudget-item'
 })
 export class BudgetItemComponent{
 
-  @Input() item!: IBudgetItem;
+  @Input() item!: BudgetItemDto;
 
 }

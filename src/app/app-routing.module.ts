@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ItemListComponent } from './components/item-list-components/item-list/item-list.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'budget-list', pathMatch: 'full'},
-  { path: 'budget-list', component: ItemListComponent }
+  //{ path: '', redirectTo: 'budget-list', pathMatch: 'full'},
+  { path: '', component: DashboardComponent }
 ];
 
 @NgModule({

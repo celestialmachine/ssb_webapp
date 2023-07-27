@@ -1,4 +1,4 @@
-export interface IBudgetItem {
+export interface BudgetItemDto {
   id: number;
   name: string;
   description: string;
@@ -6,7 +6,6 @@ export interface IBudgetItem {
   occurrenceDay: number;
   amount: number;
 }
-
 export enum Occurrence {
   None,
   Monthly,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SsbApiService } from '../../../ssb-api.service';
-import { IBudgetItem } from '../../../ibudget-item';
+import { BudgetItemDto } from '../budget-item/budget-item-dto';
 import { BudgetItemComponent } from '../budget-item/budget-item.component';
 
 @Component({
@@ -10,7 +10,7 @@ import { BudgetItemComponent } from '../budget-item/budget-item.component';
 })
 export class ItemListComponent implements OnInit{
 
-  items: IBudgetItem[] = [];
+  items: BudgetItemDto[] = [];
 
   constructor(private api: SsbApiService) { }
 
