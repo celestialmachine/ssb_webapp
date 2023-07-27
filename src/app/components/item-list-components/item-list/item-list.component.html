@@ -8,4 +8,13 @@
     <tr app-budget-item *ngFor="let item of items" [item]="item"></tr>
   </table>
 </div>
-
+<div class="budget-item">
+  <button class="btn btn-toggle align-items-center collapsed" data-bs-toggle="collapse" data-bs-target="#item-collapse" aria-expanded="true">ITEM</button>
+  <div class="collapse show" id="item-collapse">
+    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+      <li><a href="#" class="link-dark">Item Name</a></li>
+      <li><a href="#" class="link-dark">Amount</a></li>
+      <li><a href="#" class="link-dark">Occurence</a></li>
+    </ul>
+  </div>
+</div>
