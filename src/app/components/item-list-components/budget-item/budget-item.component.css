@@ -1,0 +1,17 @@
+a {
+    margin-bottom: 1px;
+}
+
+a:hover{
+    cursor: pointer;
+}
+ul {
+    padding: 0 !important;
+}
+li {
+    display: flex;
+    flex-direction: column;
+}
+.item-name{
+
+}
