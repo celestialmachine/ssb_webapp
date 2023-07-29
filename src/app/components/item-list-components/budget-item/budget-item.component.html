@@ -1,11 +1,16 @@
-<a class="collapsed bg-secondary border-start border-3 border-dark d-flex justify-content-between text-decoration-none px-3 py-2" data-bs-toggle="collapse" [attr.data-bs-target]="bstarget" aria-expanded="true">
+<a class="collapsed bg-secondary border-start border-3 border-dark d-flex justify-content-between text-decoration-none px-3 py-2 w-100 m-0" data-bs-toggle="collapse" [attr.data-bs-target]="bstarget" aria-expanded="true">
   <p class="item-name text-light m-0">{{item.name}}</p>
   <p class="item-amount text-light m-0">{{item.amount}}</p>
 </a>
-<div class="collapse hide" [attr.id]="target">
-  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small d-flex flex-column m-0">
-    <li><a href="#" class="link-dark">Item Name</a></li>
-    <li><a href="#" class="link-dark">Amount</a></li>
-    <li><a href="#" class="link-dark">Occurence</a></li>
+<div class="collapse hide show" [attr.id]="target">
+  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small d-flex flex-column m-0 text-center">
+    <li>{{item.description}}</li>
+    <li>
+      <p class="m-0">Due every&nbsp;<span>{{occurrence}}</span>, on the&nbsp;<span>{{item.occurrenceDay}}</span></p>
+    </li>
   </ul>
+  <div class="edit-items-area d-flex gap-1 p-1">
+    <button type="button" class="btn btn-sm btn-warning w-50">Edit</button>
+    <button type="button" class="btn btn-sm btn-danger w-50" (click)="deleteSelf(item)">Delete</button>
+  </div>
 </div>
