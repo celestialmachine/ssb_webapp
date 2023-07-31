@@ -12,11 +12,10 @@ export class BudgetItemComponent implements OnInit{
   itemDropDownTarget: string = "item-collapse";
   dataToggleAttr: string = "";
   //bound properties to toggle form edit/save display state
-  editShowClass: string = "";
-  editHideClass: string = "";
   editActive: boolean = false;
-
-  occurrence: string = "";
+  //Consider using an occurence global service
+  keys = Object.keys;
+  occurrences: any;
 
   @Input() item!: BudgetItemDto;
 
@@ -25,19 +24,22 @@ export class BudgetItemComponent implements OnInit{
   ngOnInit(): void {
     this.itemDropDownTarget += this.item.id.toString();
     this.dataToggleAttr = "#" + this.itemDropDownTarget;
-    this.occurrence = Occurrence[this.item.occurrence];
+    this.occurrences = Object.values(Occurrence).filter(v => typeof v !== 'number');
+    //remove this. only for testing. This is done on enterEditMode method.
+    this.itemForm.get('occurrence')?.setValue(Occurrence[this.item.occurrence]);
   }
 
   itemForm = this.formBuilder.group({
     name: '',
     description: '',
     occurrence: '',
-    occurrenceDa: '',
+    occurrenceDay: '',
     amount: ''
   })
 
   enterEditMode(): void {
     this.editActive = !this.editActive;
+    this.itemForm.get('occurrence')?.setValue(Occurrence[this.item.occurrence]);
   }
 
   onSubmit(): void {
@@ -45,8 +47,14 @@ export class BudgetItemComponent implements OnInit{
   }
 
   @Output() deleteEvent = new EventEmitter<BudgetItemDto>();
-
   deleteSelf(value: BudgetItemDto) {
     this.deleteEvent.emit(value);
+  }
+
+  OccurenceDay(occurrence: number, day: number): string {
+    switch(occurrence) {
+
+    }
+    return "";
   }
 }

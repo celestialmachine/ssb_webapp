@@ -13,15 +13,14 @@
         <label for="description">Description:</label>
         <input class="w-100"  type="text" placeholder="{{item.description}}" id="description" formControlName="description" />
       </li>
-      <li>
-        <p class="m-0">Due &nbsp;
-          <span>{{occurrence}}</span>
-          <select id="occurrence" name="occurrence">
-            <option></option>
-          </select>
-        , on the&nbsp;
-          <span>{{item.occurrenceDay}}</span>
-        </p>
+      <li class="d-flex flex-row justify-content-center">
+        <p class="m-0">Due&nbsp;</p>
+        <span [ngClass]="{'edit-show': !editActive, 'edit-hide': editActive}">{{occurrences[item.occurrence]}}</span>
+        <select [ngClass]="{'edit-show': editActive, 'edit-hide': !editActive}" id="occurrence" name="occurrence" formControlName="occurrence">
+            <option *ngFor="let occurr of keys(occurrences)" [ngValue]="occurrences[occurr]">{{occurrences[occurr]}}</option>
+        </select>
+        <p class="m-0">, on the&nbsp;</p>
+        <p class="m-0">{{item.occurrenceDay}}</p>
       </li>
     </ul>
     <div class="edit-items-area d-flex gap-1 p-1">
