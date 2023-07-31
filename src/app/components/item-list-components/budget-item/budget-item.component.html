@@ -1,16 +1,33 @@
-<a class="collapsed bg-secondary border-start border-3 border-dark d-flex justify-content-between text-decoration-none px-3 py-2 w-100 m-0" data-bs-toggle="collapse" [attr.data-bs-target]="bstarget" aria-expanded="true">
-  <p class="item-name text-light m-0">{{item.name}}</p>
-  <p class="item-amount text-light m-0">{{item.amount}}</p>
-</a>
-<div class="collapse hide show" [attr.id]="target">
-  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small d-flex flex-column m-0 text-center">
-    <li>{{item.description}}</li>
-    <li>
-      <p class="m-0">Due every&nbsp;<span>{{occurrence}}</span>, on the&nbsp;<span>{{item.occurrenceDay}}</span></p>
-    </li>
-  </ul>
-  <div class="edit-items-area d-flex gap-1 p-1">
-    <button type="button" class="btn btn-sm btn-warning w-50">Edit</button>
-    <button type="button" class="btn btn-sm btn-danger w-50" (click)="deleteSelf(item)">Delete</button>
+<form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+  <a class="collapsed bg-secondary border-start border-3 border-dark d-flex justify-content-between text-decoration-none px-3 py-2 w-100 m-0" data-bs-toggle="collapse" [attr.data-bs-target]="dataToggleAttr" aria-expanded="true">
+    <p class="item-name text-light m-0" [ngClass]="{'edit-show': !editActive, 'edit-hide': editActive}">{{item.name}}</p>
+    <input class="w-50 m-0" [ngClass]="{'edit-show': editActive, 'edit-hide': !editActive}" id="name" type="text" placeholder="{{item.name}}" formControlName="name" />
+    <p class="item-amount text-light m-0" [ngClass]="{'edit-show': !editActive, 'edit-hide': editActive}">{{item.amount}}</p>
+    <input class="w-25 m-0" [ngClass]="{'edit-show': editActive, 'edit-hide': !editActive}" id="amount" type="text" placeholder="{{item.amount}}" formControlName="name" />
+  </a>
+<!--remove show to load all items collapsed-->
+  <div class="item-dropdown collapse hide show" [attr.id]="itemDropDownTarget">
+    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small d-flex flex-column m-0 text-center">
+      <li [ngClass]="{'edit-show': !editActive, 'edit-hide': editActive}">{{item.description}}</li>
+      <li [ngClass]="{'edit-show': editActive, 'edit-hide': !editActive}">
+        <label for="description">Description:</label>
+        <input class="w-100"  type="text" placeholder="{{item.description}}" id="description" formControlName="description" />
+      </li>
+      <li>
+        <p class="m-0">Due &nbsp;
+          <span>{{occurrence}}</span>
+          <select id="occurrence" name="occurrence">
+            <option></option>
+          </select>
+        , on the&nbsp;
+          <span>{{item.occurrenceDay}}</span>
+        </p>
+      </li>
+    </ul>
+    <div class="edit-items-area d-flex gap-1 p-1">
+      <button type="button" class="btn btn-sm btn-warning w-50" [ngClass]="{'edit-show': !editActive, 'edit-hide': editActive}" (click)="enterEditMode()">Edit</button>
+      <button type="submit" class="btn btn-sm btn-success w-50" [ngClass]="{'edit-show': editActive, 'edit-hide': !editActive}" (click)="enterEditMode()">Save</button>
+      <button type="button" class="btn btn-sm btn-danger w-50" (click)="deleteSelf(item)">Delete</button>
+    </div>
   </div>
-</div>
+</form>

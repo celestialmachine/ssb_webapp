@@ -11,6 +11,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { EventListComponent } from './components/event-list-components/event-list/event-list.component';
 import { BudgetEventComponent } from './components/event-list-components/budget-event/budget-event.component';
 import { CalendarComponent } from './components/calendar-components/calendar/calendar.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import { CalendarComponent } from './components/calendar-components/calendar/cal
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
