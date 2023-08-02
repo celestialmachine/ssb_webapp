@@ -1,9 +1,11 @@
 a {
     margin-bottom: 1px;
 }
-
 a:hover{
     cursor: pointer;
+}
+.disabled-cursor:hover {
+    cursor: default;
 }
 .edit-show {
     display: none;

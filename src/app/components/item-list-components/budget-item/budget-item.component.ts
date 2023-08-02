@@ -37,8 +37,9 @@ export class BudgetItemComponent implements OnInit{
     amount: ''
   })
 
-  enterEditMode(): void {
+  toggleEditMode(): void {
     this.editActive = !this.editActive;
+    this.itemDropDownTarget = this.itemDropDownTarget ? "" : "item-collapse" + this.item.id.toString();
     this.itemForm.get('occurrence')?.setValue(Occurrence[this.item.occurrence]);
   }
 

@@ -1,4 +1,5 @@
 <!--<tr app-budget-item *ngFor="let item of items" [item]="item"></tr>-->
 <section class="d-flex flex-column">
-  <app-budget-item class="item-container d-flex flex-column" *ngFor="let item of items" [item]="item" (deleteEvent)="deleteItem($any($event))"></app-budget-item>
+  <app-budget-item class="item-container d-flex flex-column" *ngFor="let item of items"
+                   [item]="item" (deleteEvent)="deleteItem($any($event))"></app-budget-item>
 </section>
