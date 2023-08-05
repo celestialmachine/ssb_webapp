@@ -2,7 +2,7 @@ export interface BudgetItemDto {
   id: number;
   name: string;
   description: string;
-  occurrence: Occurrence;
+  occurrence: number;
   occurrenceDay: number;
   amount: number;
 }

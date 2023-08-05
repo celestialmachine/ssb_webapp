@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { BudgetItemDto, Occurrence } from '../budget-item/budget-item-dto';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-budget-item',
@@ -28,21 +28,22 @@ export class BudgetItemComponent implements OnInit{
     this.initializeForm();
   }
 
-  itemForm = this.formBuilder.group({
-    id: 0,
-    name: '',
-    description: '',
-    occurrence: 0,
-    occurrenceDay: 0,
-    amount: 0
-  })
+  itemForm = new FormGroup({
+    id: new FormControl(0),
+    name: new FormControl(''),
+    description: new FormControl(''),
+    occurrence: new FormControl(''),
+    occurrenceDay: new FormControl(0),
+    amount: new FormControl(0),
+  });
+
 
   initializeForm() {
-    this.itemForm.setValue({
+    this.itemForm.patchValue({
       id: this.item.id,
       name: this.item.name,
       description: this.item.description,
-      occurrence: this.item.occurrence,
+      occurrence: this.item.occurrence.toString(),
       occurrenceDay: this.item.occurrenceDay,
       amount: this.item.amount
     })
@@ -50,16 +51,20 @@ export class BudgetItemComponent implements OnInit{
 
   toggleEditMode(): void {
     this.editActive = !this.editActive;
+    //stops form from collapsing when on edit mode
     this.itemDropDownTarget = this.itemDropDownTarget ? "" : "item-collapse" + this.item.id?.toString();
-    this.itemForm.get('occurrence')?.setValue(this.item.occurrence);
   }
 
   @Output() updateEvent = new EventEmitter<BudgetItemDto>();
   updateSelf() {
-    let value: BudgetItemDto = this.itemForm.value as BudgetItemDto;
-    this.updateEvent.emit(value);
-    console.log(this.item.description);
-    console.log(this.itemForm)
+    this.item.name = this.itemForm.value.name as string;
+    this.item.description = this.itemForm.value.description as string;
+    this.item.occurrence = parseInt(this.itemForm.value.occurrence as string);
+    this.item.occurrenceDay = this.itemForm.value.occurrenceDay as number;
+    this.item.amount = this.itemForm.value.amount as number;
+    console.log(this.item.occurrence);
+    console.log(this.item);
+    this.updateEvent.emit(this.item);
     this.toggleEditMode();
   }
 
