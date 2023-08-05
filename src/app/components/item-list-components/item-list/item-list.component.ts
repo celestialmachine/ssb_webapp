@@ -22,6 +22,10 @@ export class ItemListComponent implements OnInit{
     this.api.getItems().subscribe(items => this.items = items);
   }
 
+  updateItem(value: BudgetItemDto) {
+    this.api.updateItem(value).subscribe();
+  }
+
   deleteItem(value: BudgetItemDto) {
     this.items = this.items.filter(bi => bi !== value);
     //this.api.deleteItem(value.id).subscribe();
