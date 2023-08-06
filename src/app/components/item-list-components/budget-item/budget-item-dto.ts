@@ -7,7 +7,7 @@ export interface BudgetItemDto {
   amount: number;
 }
 export enum Occurrence {
-  None,
+  Never,
   Monthly,
   Weekly,
   BiWeekly

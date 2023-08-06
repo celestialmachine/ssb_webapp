@@ -16,16 +16,25 @@ export class BudgetItemComponent implements OnInit{
   //Consider using an occurence global service
   keys = Object.keys;
   occurrences: any;
+  //display values for due date
+  occurrenceDisplay: string = "0";
+  occurrenceDays: number[] = []
+  weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
+  //model
   @Input() item!: BudgetItemDto;
 
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    //initalize dropdown targets by id
     this.itemDropDownTarget += this.item.id?.toString();
     this.dataToggleAttr = "#" + this.itemDropDownTarget;
     this.occurrences = Object.values(Occurrence).filter(v => typeof v !== 'number');
+    this.occurrenceDays = Array.from({ length: 31 }, (_, i) => i + 1);
+    //set initial form values from item model
     this.initializeForm();
+    this.updateDay();
   }
 
   itemForm = new FormGroup({
@@ -51,19 +60,20 @@ export class BudgetItemComponent implements OnInit{
 
   toggleEditMode(): void {
     this.editActive = !this.editActive;
+    this.updateDay();
     //stops form from collapsing when on edit mode
     this.itemDropDownTarget = this.itemDropDownTarget ? "" : "item-collapse" + this.item.id?.toString();
   }
 
   @Output() updateEvent = new EventEmitter<BudgetItemDto>();
   updateSelf() {
+    //copy all form values to model
     this.item.name = this.itemForm.value.name as string;
     this.item.description = this.itemForm.value.description as string;
     this.item.occurrence = parseInt(this.itemForm.value.occurrence as string);
     this.item.occurrenceDay = this.itemForm.value.occurrenceDay as number;
     this.item.amount = this.itemForm.value.amount as number;
-    console.log(this.item.occurrence);
-    console.log(this.item);
+    //pass model to event emitter then toggle edit mode
     this.updateEvent.emit(this.item);
     this.toggleEditMode();
   }
@@ -73,10 +83,59 @@ export class BudgetItemComponent implements OnInit{
     this.deleteEvent.emit(value);
   }
 
-  OccurenceDay(occurrence: number, day: number): string {
-    switch(occurrence) {
-
+  updateDay(): void {
+    if (this.itemForm.value.occurrence == "0") {
+      this.occurrenceDisplay = "";
     }
-    return "";
+    else if (this.itemForm.value.occurrence == "1") {
+      this.occurrenceDisplay = ", on day " + this.item.occurrenceDay.toString();
+    }
+    else if (this.itemForm.value.occurrence == "2" || this.itemForm.value.occurrence == "3") {
+      this.occurrenceDisplay = ", on " + this.weekDays[this.item.occurrenceDay - 1];
+    }
+    else {
+      this.occurrenceDisplay = "ErrOccDisp";
+    }
+
+    if (this.itemForm.value.occurrenceDay) {
+      this.item.occurrenceDay = this.itemForm.value.occurrenceDay;
+    } else {
+      //TODO handle error?
+    }
+  }
+
+  weekdayChange(value: string): void {
+    //TODO handle out of range error for range outside weekdays array
+    this.itemForm.value.occurrenceDay = this.weekDays.indexOf(value) + 1;
+  }
+
+  occurrDropdown(value: number): boolean {
+    switch (value) {
+      //display nothing if never(0)
+      case 0: {
+        if (this.itemForm.value.occurrence as unknown as number == 0) {
+          return false;
+        }
+        else return true;
+      }
+      //if occurrence is monthly(1)
+      case 1: {
+        if (this.editActive && this.itemForm.value.occurrence as unknown as number == 1) {
+          return true;
+        }
+        else return false;
+      }
+      //if occurrence is weekly(2) or biweekly
+      case 2: {
+        if ((this.editActive && this.itemForm.value.occurrence as unknown as number == 2) || (this.editActive && this.itemForm.value.occurrence as unknown as number == 3)) {
+          return true;
+        }
+        else return false;
+      }
+      default:
+        //TODO error
+    }
+    console.log(value);
+    return this.editActive;
   }
 }

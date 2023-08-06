@@ -9,7 +9,7 @@
            id="amount" type="text" value="{{item.amount}}" formControlName="amount" />
   </a>
   <!--remove show to load all items collapsed-->
-  <div class="item-dropdown collapse hide show" [attr.id]="itemDropDownTarget">
+  <div class="item-dropdown collapse hide" [attr.id]="itemDropDownTarget">
     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small d-flex flex-column m-0 text-center">
       <li [ngClass]="{'edit-show': editActive, 'edit-hide': !editActive}">{{item.description}}</li>
       <li [ngClass]="{'edit-show': !editActive, 'edit-hide': editActive}">
@@ -22,8 +22,15 @@
         <select [ngClass]="{'edit-show': !editActive, 'edit-hide': editActive}" id="occurrence" name="occurrence" formControlName="occurrence">
           <option *ngFor="let occurr of keys(occurrences)" [attr.selected]="occurrences[item.occurrence] === occurr ? true : null" [ngValue]="occurr">{{occurrences[occurr]}}</option>
         </select>
-        <p class="m-0">, on the&nbsp;</p>
-        <p class="m-0">{{item.occurrenceDay}}</p>
+        <p class="m-0" [ngClass]="{'edit-show': editActive, 'edit-hide': !editActive}">{{occurrenceDisplay}}</p>
+        <select [ngClass]="{'edit-show': !occurrDropdown(1), 'edit-hide': occurrDropdown(1)}"
+                id="occurrenceDay" name="occurrenceDay" formControlName="occurrenceDay">
+          <option *ngFor="let day of occurrenceDays" [ngValue]="day" [attr.selected]="item.occurrenceDay === day ? true : null">{{day}}</option>
+        </select>
+        <select #weekdaySelect [ngClass]="{'edit-show': !occurrDropdown(2), 'edit-hide': occurrDropdown(2)}"
+                (change)="weekdayChange(weekdaySelect.value)">
+          <option *ngFor="let weekday of weekDays; let i = index" [ngValue]="weekday" [attr.selected]="item.occurrenceDay == (i + 1) ? true : null">{{weekday}}</option>
+        </select>
       </li>
     </ul>
     <div class="edit-items-area d-flex gap-1 p-1">
@@ -33,6 +40,10 @@
       </button>
       <button type="submit" class="btn btn-sm btn-success w-50" [ngClass]="{'edit-show': !editActive, 'edit-hide': editActive}">
         Save
+      </button>
+      <button type="button" class="btn btn-sm btn-secondary w-50" [ngClass]="{'edit-show': !editActive, 'edit-hide': editActive}"
+              (click)="toggleEditMode()">
+        Cancel
       </button>
       <button type="button" class="btn btn-sm btn-danger w-50" (click)="deleteSelf(item)">Delete</button>
     </div>
