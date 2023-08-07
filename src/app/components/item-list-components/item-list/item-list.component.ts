@@ -27,11 +27,11 @@ export class ItemListComponent implements OnInit{
   }
 
   addItem(value: BudgetItemDto) {
-    this.api.addItem(value).subscribe();
+    this.api.addItem(value).subscribe(item => this.items.push(item));
   }
 
   deleteItem(value: BudgetItemDto) {
     this.items = this.items.filter(bi => bi !== value);
-    //this.api.deleteItem(value.id).subscribe();
+    this.api.deleteItem(value.id).subscribe();
   }
 }
