@@ -2,4 +2,5 @@
 <section class="d-flex flex-column">
   <app-budget-item class="item-container d-flex flex-column" *ngFor="let item of items" [item]="item"
                    (deleteEvent)="deleteItem($any($event))" (updateEvent)="updateItem($any($event))"></app-budget-item>
+  <app-new-item (addEvent)="addItem($event)"></app-new-item>
 </section>

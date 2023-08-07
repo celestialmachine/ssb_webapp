@@ -22,8 +22,11 @@ export class SsbApiService {
   }
 
   updateItem(item: BudgetItemDto): Observable<any> {
-
     return this.http.put(`${this.itemsUrl}/${item.id}`, item, this.httpOptions);
+  }
+
+  addItem(item: BudgetItemDto): Observable<any> {
+    return this.http.post(this.itemsUrl, item, this.httpOptions);
   }
 
   deleteItem(id: number): Observable<BudgetItemDto> {

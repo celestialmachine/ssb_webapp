@@ -12,6 +12,7 @@ import { EventListComponent } from './components/event-list-components/event-lis
 import { BudgetEventComponent } from './components/event-list-components/budget-event/budget-event.component';
 import { CalendarComponent } from './components/calendar-components/calendar/calendar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NewItemComponent } from './components/item-list-components/new-item/new-item.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     EventListComponent,
     BudgetEventComponent,
     CalendarComponent,
+    NewItemComponent,
   ],
   imports: [
     BrowserModule,

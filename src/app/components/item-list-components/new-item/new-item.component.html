@@ -1,0 +1,41 @@
+<form [formGroup]="newItemForm" (ngSubmit)="addNewItem()">
+  <a class="collapsed bg-info border-start border-3 border-dark d-flex justify-content-between text-decoration-none px-3 py-2 w-100 m-0 z-0"
+     data-bs-toggle="collapse" data-bs-target="#formBody" aria-expanded="true">
+    <p class="text-light m-0 ">NEW ITEM</p>
+  </a>
+  <!--remove 'show' to load collapsed-->
+  <div class="item-dropdown collapse hide show" id="formBody">
+    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small d-flex flex-column m-0 text-center">
+      <li>
+        <label for="name">Name:</label>
+        <input class="w-100" type="text" placeholder="New item name" id="name" formControlName="name" />
+      </li>
+      <li>
+        <label for="amount">amount:</label>
+        <input class="w-100" type="text" placeholder="New item amount" id="amount" formControlName="amount" />
+      </li>
+      <li>
+        <label for="description">Description:</label>
+        <input class="w-100" type="text" placeholder="New item description" id="description" formControlName="description" />
+      </li>
+      <li>
+        <label for="occurrence">Due:</label>
+        <select id="occurrence" name="occurrence" formControlName="occurrence">
+          <option *ngFor="let occurr of keys(occurrences)" [ngValue]="occurr" [attr.selected]="occurr == '1' ? true : null">{{occurrences[occurr]}}</option>
+        </select>
+        <span>Due day/date:</span>
+        <select [ngClass]="{'edit-show': !occurrDropdown(1), 'edit-hide': occurrDropdown(1)}"
+                id="occurrenceDay" name="occurrenceDay" formControlName="occurrenceDay">
+          <option *ngFor="let day of occurrenceDays" [ngValue]="day" [attr.selected]="newItemForm.value.occurrenceDay === day ? true : null">{{day}}</option>
+        </select>
+        <select #newWeekdaySelect [ngClass]="{'edit-show': !occurrDropdown(2), 'edit-hide': occurrDropdown(2)}"
+                (change)="weekdayChange(newWeekdaySelect.value)">
+          <option *ngFor="let weekday of weekDays; let i = index" [ngValue]="weekday" [attr.selected]="newItemForm.value.occurrenceDay == (i + 1) ? true : null">{{weekday}}</option>
+        </select>
+      </li>
+    </ul>
+    <div class="d-flex gap-1 p-1">
+      <button type="submit" class="btn btn-sm btn-success w-100">Save</button>
+    </div>
+  </div>
+</form>

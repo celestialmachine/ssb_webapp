@@ -47,7 +47,7 @@ export class BudgetItemComponent implements OnInit{
   });
 
 
-  initializeForm() {
+  initializeForm(): void {
     this.itemForm.patchValue({
       id: this.item.id,
       name: this.item.name,
@@ -66,7 +66,7 @@ export class BudgetItemComponent implements OnInit{
   }
 
   @Output() updateEvent = new EventEmitter<BudgetItemDto>();
-  updateSelf() {
+  updateSelf(): void {
     //copy all form values to model
     this.item.name = this.itemForm.value.name as string;
     this.item.description = this.itemForm.value.description as string;
@@ -135,7 +135,6 @@ export class BudgetItemComponent implements OnInit{
       default:
         //TODO error
     }
-    console.log(value);
     return this.editActive;
   }
 }

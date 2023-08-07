@@ -1,0 +1,25 @@
+a {
+    margin-bottom: 1px;
+}
+a:hover{
+    cursor: pointer;
+}
+.disabled-cursor:hover {
+    cursor: default;
+}
+.edit-show {
+    display: none;
+}
+.edit-hide {
+    display: block;
+}
+ul {
+    padding: 0 !important;
+}
+li {
+    display: flex;
+    flex-direction: column;
+}
+.item-name{
+
+}
