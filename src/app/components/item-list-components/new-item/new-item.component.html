@@ -20,17 +20,23 @@
       </li>
       <li>
         <label for="occurrence">Due:</label>
-        <select id="occurrence" name="occurrence" formControlName="occurrence">
-          <option *ngFor="let occurr of keys(occurrences)" [ngValue]="occurr" [attr.selected]="occurr == '1' ? true : null">{{occurrences[occurr]}}</option>
+        <select #occurrence id="occurrence" name="occurrence" formControlName="occurrence"
+                (change)="dayDisplay.occurrChange(occurrenceDay.value, newWeekdaySelect.value, occurrence.value, newItemForm)">
+          <option *ngFor="let occurr of keys(dayDisplay.occurrences)" [ngValue]="occurr" [attr.selected]="occurr == '1' ? true : null">{{dayDisplay.occurrences[occurr]}}</option>
         </select>
         <span>Due day/date:</span>
-        <select [ngClass]="{'edit-show': !occurrDropdown(1), 'edit-hide': occurrDropdown(1)}"
-                id="occurrenceDay" name="occurrenceDay" formControlName="occurrenceDay">
-          <option *ngFor="let day of occurrenceDays" [ngValue]="day" [attr.selected]="newItemForm.value.occurrenceDay === day ? true : null">{{day}}</option>
+        <select #occurrenceDay [ngClass]="{'edit-show': !dayDisplay.dropdownShow(1, newItemForm), 'edit-hide': dayDisplay.dropdownShow(1, newItemForm)}"
+                id="occurrenceDay" name="occurrenceDay" formControlName="occurrenceDay"
+                (change)="dayDisplay.occurrChange(occurrenceDay.value, newWeekdaySelect.value, occurrence.value, newItemForm)">
+          <option *ngFor="let day of dayDisplay.occurrenceDays" [ngValue]="day"
+                  [attr.selected]="newItemForm.value.occurrenceDay === day ? true : null">{{day}}</option>
         </select>
-        <select #newWeekdaySelect [ngClass]="{'edit-show': !occurrDropdown(2), 'edit-hide': occurrDropdown(2)}"
-                (change)="weekdayChange(newWeekdaySelect.value)">
-          <option *ngFor="let weekday of weekDays; let i = index" [ngValue]="weekday" [attr.selected]="newItemForm.value.occurrenceDay == (i + 1) ? true : null">{{weekday}}</option>
+        <select #newWeekdaySelect [ngClass]="{'edit-show': !dayDisplay.dropdownShow(2, newItemForm), 'edit-hide': dayDisplay.dropdownShow(2, newItemForm)}"
+                (change)="dayDisplay.occurrChange(occurrenceDay.value, newWeekdaySelect.value, occurrence.value, newItemForm)">
+          <option *ngFor="let weekday of dayDisplay.weekDays; let i = index" [ngValue]="weekday"
+                  [attr.selected]="newItemForm.value.occurrenceDay == (i + 1) ? true : null">
+            {{weekday}}
+          </option>
         </select>
       </li>
     </ul>
@@ -39,3 +45,6 @@
     </div>
   </div>
 </form>
+
+<!--[attr.selected]="newItemForm.value.occurrenceDay === day ? true : null"-->
+<!--[attr.selected]="newItemForm.value.occurrenceDay == (i + 1) ? true : null"-->
