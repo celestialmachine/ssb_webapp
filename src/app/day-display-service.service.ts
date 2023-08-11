@@ -7,7 +7,6 @@ import { FormGroup } from '@angular/forms';
 })
 export class DayDisplayServiceService {
   occurrences: any;
-  occurrenceDisplay: string = "0";
   occurrenceDays: number[] = []
   weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -46,30 +45,15 @@ export class DayDisplayServiceService {
     }
   }
 
-  occurrChange(day: string, weekday: string, occurrence: string, form: FormGroup): void {
+  getDisplayDay(occurrence: number, occurrDay: number, occurrWeekday: number): number {
     switch (occurrence) {
-      //test null on api
-      case "0": {
-        form.value.occurrenceDay = null;
-        break;
-      }
-      case "1": {
-        form.value.occurrenceDay = parseInt(day) + 1;
-        break;
-      }
-      case "2": {
-        if (parseInt(day) > 6) weekday = "0";
-        form.value.occurrenceDay = this.weekDays.indexOf(weekday) + 1;
-        break;
-      }
-      case "3": {
-        if (parseInt(day) > 6) weekday = "0";
-        form.value.occurrenceDay = this.weekDays.indexOf(weekday) + 1;
-        break;
-      }
-      default:
-        console.log("Error: occurrencce out of range on occurrChange")
+      case 0: return 0;
+      case 1: return occurrDay;
+      case 2:
+      case 3: return occurrWeekday;
+      default: console.log("Error: occurrencce out of range on occurrChange")
     }
+    return 0;
   }
 
 }

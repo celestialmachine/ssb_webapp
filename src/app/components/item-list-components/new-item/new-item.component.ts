@@ -14,8 +14,9 @@ export class NewItemComponent implements OnInit{
     id: new FormControl(),
     name: new FormControl(''),
     description: new FormControl(''),
-    occurrence: new FormControl(''),
+    occurrence: new FormControl(1),
     occurrenceDay: new FormControl(1),
+    occurrenceWeekday: new FormControl(1),
     amount: new FormControl(0)
   });
 
@@ -27,8 +28,9 @@ export class NewItemComponent implements OnInit{
 
   initializeForm(): void {
     this.newItemForm.patchValue({
-      occurrence: "1",
-      occurrenceDay: 1
+      occurrence: 1,
+      occurrenceDay: 1,
+      occurrenceWeekday: 1
     })
   }
 
@@ -37,9 +39,13 @@ export class NewItemComponent implements OnInit{
     let item = <BudgetItemDto>{};
     item.name = this.newItemForm.value.name as string;
     item.description = this.newItemForm.value.description as string;
-    item.occurrence = parseInt(this.newItemForm.value.occurrence as string);
-    item.occurrenceDay = this.newItemForm.value.occurrenceDay as number;
+    item.occurrence = this.newItemForm.value.occurrence as number;
+    item.occurrenceDay = this.dayDisplay.getDisplayDay(this.newItemForm.value.occurrence as number,
+      this.newItemForm.value.occurrenceDay as number,
+      this.newItemForm.value.occurrenceWeekday as number);
     item.amount = this.newItemForm.value.amount as number;
-    //this.addEvent.emit(item)
+    console.log(item);
+    this.addEvent.emit(item)
   }
+
 }
