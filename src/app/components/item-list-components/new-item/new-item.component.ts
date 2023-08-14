@@ -28,9 +28,12 @@ export class NewItemComponent implements OnInit{
 
   initializeForm(): void {
     this.newItemForm.patchValue({
+      name: "",
+      description: "",
       occurrence: 1,
       occurrenceDay: 1,
-      occurrenceWeekday: 1
+      occurrenceWeekday: 1,
+      amount: 0
     })
   }
 
@@ -46,6 +49,7 @@ export class NewItemComponent implements OnInit{
     item.amount = this.newItemForm.value.amount as number;
     console.log(item);
     this.addEvent.emit(item)
+    this.initializeForm();
   }
 
 }

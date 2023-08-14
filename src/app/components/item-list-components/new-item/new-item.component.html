@@ -1,10 +1,10 @@
 <form [formGroup]="newItemForm" (ngSubmit)="addNewItem()">
   <a class="collapsed bg-info border-start border-3 border-dark d-flex justify-content-between text-decoration-none px-3 py-2 w-100 m-0 z-0"
      data-bs-toggle="collapse" data-bs-target="#formBody" aria-expanded="true">
-    <p class="text-light m-0 ">NEW ITEM</p>
+    <p class="text-light m-0 ">ADD NEW ITEM</p>
   </a>
   <!--remove 'show' to load collapsed-->
-  <div class="item-dropdown collapse hide show" id="formBody">
+  <div class="item-dropdown collapse hide" id="formBody">
     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small d-flex flex-column m-0 text-center">
       <li>
         <label for="name">Name:</label>
@@ -24,7 +24,7 @@
           <option *ngFor="let occurr of dayDisplay.occurrences; let i = index"
                   [ngValue]="i"
                   [attr.selected]="(i + 1) == 1 ? true : null">
-            {{occurr}}
+                  {{occurr}}
           </option>
         </select>
         <span>Due day/date:</span>
@@ -33,7 +33,7 @@
           <option *ngFor="let day of dayDisplay.occurrenceDays"
                   [ngValue]="day"
                   [attr.selected]="newItemForm.value.occurrenceDay === day ? true : null">
-            {{day}}
+                  {{day}}
           </option>
         </select>
         <select #occurrenceWeekday id="occurrenceWeekday" name="occurrenceWeekday" formControlName="occurrenceWeekday"
@@ -41,7 +41,7 @@
           <option *ngFor="let weekday of dayDisplay.weekDays; let i = index"
                   [ngValue]="i + 1"
                   [attr.selected]="newItemForm.value.occurrenceWeekday == (i + 1) ? true : null">
-            {{weekday}}
+                  {{weekday}}
           </option>
         </select>
       </li>

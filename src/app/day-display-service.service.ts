@@ -14,7 +14,7 @@ export class DayDisplayServiceService {
     this.occurrences = Object.values(Occurrence).filter(v => typeof v !== 'number');
     this.occurrenceDays = Array.from({ length: 31 }, (_, i) => i + 1);
   }
-
+  //returns boolean to show/hide element based on occurrence dropdown value
   dropdownShow(value: number, form: FormGroup): boolean {
     switch (value) {
       //display nothing if never(0)
@@ -39,21 +39,32 @@ export class DayDisplayServiceService {
         else return false;
       }
       default:
-        //TODO error
+        //TODO ERROR HANDLING
         console.log("Error on item dropdown display")
         return false;
     }
   }
-
+  //returns value to occurrenecDay based on occurrence value
   getDisplayDay(occurrence: number, occurrDay: number, occurrWeekday: number): number {
     switch (occurrence) {
       case 0: return 0;
       case 1: return occurrDay;
       case 2:
       case 3: return occurrWeekday;
+      //TODO ERROR HANDLING
       default: console.log("Error: occurrencce out of range on occurrChange")
     }
     return 0;
   }
-
+  //displays prefix to day display based on occurrence value
+  dayPrefix(form: FormGroup): string {
+    switch (form.value.occurrence) {
+      case 0: return "";
+      case 1: return "on day";
+      case 2:
+      case 3: return "on";
+      //TODO ERROR HANDLING: 
+      default: return "occurrence out of range"
+    }
+  }
 }
