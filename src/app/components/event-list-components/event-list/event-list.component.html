@@ -1,3 +1,6 @@
-<div>
-  <p>event-list works!</p>
-</div>
+<section class="d-flex flex-column">
+  <app-budget-event class="event-container d-flex flex-column"
+                    *ngFor="let event of events"
+                    [event]="event">
+  </app-budget-event>
+</section>

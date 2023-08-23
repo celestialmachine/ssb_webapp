@@ -1,5 +1,5 @@
 export interface BudgetItemDto {
-  id: number;
+  itemId: number;
   name: string;
   description: string;
   occurrence: number;

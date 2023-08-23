@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { BudgetItemDto, Occurrence } from '../budget-item/budget-item-dto';
+import { BudgetItemDto } from '../budget-item/budget-item-dto';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { DayDisplayServiceService } from '../../../day-display-service.service';
 
@@ -19,7 +19,7 @@ export class BudgetItemComponent implements OnInit{
   constructor(private formBuilder: FormBuilder, public dayDisplay: DayDisplayServiceService) { }
 
   ngOnInit(): void {
-    this.itemDropDownAttrTarget += this.item.id?.toString();
+    this.itemDropDownAttrTarget += this.item.itemId?.toString();
     this.dataToggleAttr = "#" + this.itemDropDownAttrTarget;
     this.initializeForm();
   }
@@ -36,7 +36,7 @@ export class BudgetItemComponent implements OnInit{
 
   initializeForm(): void {
     this.itemForm.patchValue({
-      id: this.item.id,
+      id: this.item.itemId,
       name: this.item.name,
       description: this.item.description,
       occurrence: this.item.occurrence,
@@ -50,7 +50,7 @@ export class BudgetItemComponent implements OnInit{
   toggleEditMode(): void {
     this.editActive = !this.editActive;
     //stops form from collapsing when on edit mode
-    this.itemDropDownAttrTarget = this.itemDropDownAttrTarget ? "" : "item-collapse" + this.item.id?.toString();
+    this.itemDropDownAttrTarget = this.itemDropDownAttrTarget ? "" : "item-collapse" + this.item.itemId?.toString();
   }
 
   @Output() updateEvent = new EventEmitter<BudgetItemDto>();

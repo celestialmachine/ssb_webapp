@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SsbApiService } from '../../../ssb-api.service';
 import { BudgetItemDto } from '../budget-item/budget-item-dto';
-import { BudgetItemComponent } from '../budget-item/budget-item.component';
 
 @Component({
   selector: 'app-item-list',
@@ -31,7 +30,8 @@ export class ItemListComponent implements OnInit{
   }
 
   deleteItem(value: BudgetItemDto) {
+    //This might be in the wrong order, item should be removed from the list after the api call returns success
     this.items = this.items.filter(bi => bi !== value);
-    this.api.deleteItem(value.id).subscribe();
+    this.api.deleteItem(value.itemId).subscribe();
   }
 }
