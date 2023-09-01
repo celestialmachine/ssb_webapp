@@ -23,7 +23,6 @@ export class BudgetEventComponent implements OnInit {
     date: new FormControl(''),
     dueDate: new FormControl(''),
     balance: new FormControl(0),
-    isPaid: new FormControl(false),
     note: new FormControl('')
   });
 

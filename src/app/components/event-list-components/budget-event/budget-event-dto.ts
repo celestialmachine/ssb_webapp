@@ -8,6 +8,5 @@ export interface BudgetEventDto {
   date: Date;
   dueDate: Date;
   balance: number;
-  isPaid: boolean;
   note: string;
 }
