@@ -30,7 +30,7 @@ export class ItemListComponent implements OnInit{
   }
 
   deleteItem(value: BudgetItemDto) {
-    //This might be in the wrong order, item should be removed from the list after the api call returns success
+    //TODO: This is in the wrong order, item should be removed from the list after the api call returns successful deletion.
     this.items = this.items.filter(bi => bi !== value);
     this.api.deleteItem(value.itemId).subscribe();
   }

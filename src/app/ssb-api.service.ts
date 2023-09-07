@@ -3,13 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BudgetItemDto } from './components/item-list-components/budget-item/budget-item-dto'
 import { BudgetEventDto } from './components/event-list-components/budget-event/budget-event-dto';
-//import { BudgetItemComponent } from '../app/components/item-list-components/budget-item/budget-item.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SsbApiService {
 
+  //current URLs reflect the local development environment
   private itemsUrl = 'https://localhost:7034/api/BudgetItems'
   private eventsUrl = 'https://localhost:7034/api/BudgetEvents'
 
@@ -39,9 +39,3 @@ export class SsbApiService {
     return this.http.delete<BudgetItemDto>(url, this.httpOptions);
   }
 }
-
-//updateHero(hero: Hero): Observable < any > {
-//  return this.http.put(this.heroesUrl, hero, this.httpOptions).pipe(
-//    tap(_ => this.log(`updated hero id=${hero.id}`)),
-//    catchError(this.handleError<any>('updateHero')));
-//}
