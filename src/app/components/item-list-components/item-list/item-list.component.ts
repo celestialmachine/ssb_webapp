@@ -21,13 +21,20 @@ export class ItemListComponent implements OnInit{
     this.api.getItems().subscribe(items => this.items = items);
   }
 
+  getEventsById(eventId: number): void {
+    this.api.addEventsByItem(eventId);
+  }
+
   updateItem(value: BudgetItemDto) {
     this.api.updateItem(value).subscribe();
   }
 
   addItem(value: BudgetItemDto) {
     this.api.addItem(value).subscribe(item => this.items.push(item));
+    //need to get new item id to call getEventsById from api service
   }
+
+ 
 
   deleteItem(value: BudgetItemDto) {
     //TODO: This is in the wrong order, item should be removed from the list after the api call returns successful deletion.

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { BudgetItemDto } from './components/item-list-components/budget-item/budget-item-dto'
 import { BudgetEventDto } from './components/event-list-components/budget-event/budget-event-dto';
 
@@ -17,6 +17,9 @@ export class SsbApiService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json'})
   }
 
+  private eventsByItemSource = new BehaviorSubject<BudgetEventDto[]>([]);
+  eventsByItem = this.eventsByItemSource.asObservable();
+
   constructor(private http: HttpClient) { }
 
   getItems(): Observable<BudgetItemDto[]> {
@@ -24,6 +27,13 @@ export class SsbApiService {
   }
   getEvents(): Observable<BudgetEventDto[]> {
     return this.http.get<BudgetEventDto[]>(this.eventsUrl);
+  }
+  getEventsByItem(itemId: number): Observable<BudgetEventDto[]> {
+    return this.http.get<BudgetEventDto[]>(`${this.eventsUrl}/byitem/${itemId}`);
+  }
+  //Called by item list when new item is added
+  addEventsByItem(itemId: number): void {
+    this.getEventsByItem(itemId).subscribe(events => this.eventsByItemSource.next(events));
   }
 
   updateItem(item: BudgetItemDto): Observable<any> {
