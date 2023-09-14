@@ -1,6 +1,17 @@
-<section class="d-flex flex-column">
-  <app-budget-event class="event-container d-flex flex-column"
-                    *ngFor="let event of events"
-                    [event]="event">
-  </app-budget-event>
-</section>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Description</th>
+      <th scope="col">Deposits</th>
+      <th scope="col">Withdraws</th>
+      <th scope="col">Balance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr app-budget-event class="event-container"
+                      *ngFor="let event of events"
+                      [event]="event">
+    </tr>
+  </tbody>
+</table>

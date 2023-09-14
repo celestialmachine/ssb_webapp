@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { DayDisplayServiceService } from '../../../day-display-service.service';
 
 @Component({
-  selector: 'app-budget-event',
+  selector: 'tr[app-budget-event]',
   templateUrl: './budget-event.component.html',
   styleUrls: ['./budget-event.component.css']
 })
@@ -13,6 +13,8 @@ export class BudgetEventComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, public dayDisplay: DayDisplayServiceService) { }
 
   ngOnInit(): void { }
+
+  //consider separate forms for editing events
 
   eventForm = new FormGroup({
     id: new FormControl(0),
