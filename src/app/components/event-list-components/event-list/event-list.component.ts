@@ -22,6 +22,12 @@ export class EventListComponent implements OnInit{
     this.api.getEvents().subscribe(events => this.events = events);
   }
 
+  get sortEvents(): BudgetEventDto[] {
+    return this.events.sort((b, a) => {
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
+  }
+
   updateEvent(value: BudgetEventDto) {
     //this.api.updateEvent(value).subscribe();
   }
